@@ -1,0 +1,23 @@
+{
+  "name": "map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/huangbxaaa/map_front.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huangbxaaa/map_front/issues"
+  },
+  "homepage": "https://github.com/huangbxaaa/map_front#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "vue": "^2.5.16"
+  }
+}
