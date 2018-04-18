@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>City map</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -30,97 +30,167 @@
   </head>
 
   <body>
+	<div class="origin">
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">City Map</a>
+	        </div>
+	        <div id="navbar" class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="#">Dashboard</a></li>
+	            <li><a href="#">Settings</a></li>
+	            <li><a href="#">Profile</a></li>
+	            <li><a href="#">Help</a></li>
+	          </ul>
+	          <form class="navbar-form navbar-right">
+	            <input type="text" class="form-control" placeholder="Search...">
+	          </form>
+	        </div>
+	      </div>
+	    </nav>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">City Map</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </nav>
+	    <div class="container-fluid">
+	      <div class="row">
+	        <div class="col-sm-3 col-md-2 sidebar">
+	          <ul class="nav nav-sidebar">
+	            <li id="SelectName" class="active"><a href="#">Name <span class="sr-only">(current)</span></a></li>
+	            <li><a href="#">Reports</a></li>
+	            <li><a href="#">Analytics</a></li>
+	            <li><a href="#">Export</a></li>
+	          </ul>
+	          <ul class="nav nav-sidebar">
+	            <li><a href="">Nav item</a></li>
+	            <li><a href="">Nav item again</a></li>
+	            <li><a href="">One more nav</a></li>
+	            <li><a href="">Another nav item</a></li>
+	            <li><a href="">More navigation</a></li>
+	          </ul>
+	          <ul class="nav nav-sidebar">
+	            <li><a href="">Nav item again</a></li>
+	            <li><a href="">One more nav</a></li>
+	            <li><a href="">Another nav item</a></li>
+	          </ul>
+	        </div>
+	        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	          <h1 class="page-header">CityMap</h1>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Name <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">CityMap</h1>
+	          <div class="row placeholders">
+	          	<div class="map">
+	          		
+	          	</div>
 
-          <div class="row placeholders">
-          	<div class="map">
-          		
-          	</div>
+	          </div>
 
-          </div>
+	          <h2 class="sub-header">SearchResult</h2>
+	          <div class="table-responsive">
+	            <table class="table table-striped">
+	              <thead>
+	                <tr>
+	                  <th>Name</th>
+	                  <th>Type</th>
+	                  <th>Position</th>
+	                  <th>Year</th>
+	                  <th>Level</th>
+	                </tr>
+	              </thead>
+	              <tbody>
+	                <tr>
+	                  <td>中山大学公教楼</td>
+	                  <td>Building</td>
+	                  <td>SYSU</td>
+	                  <td>1997</td>
+	                  <td>1</td>
+	                </tr>
+	                <tr>
+	                  <td>行政楼餐厅</td>
+	                  <td>Building</td>
+	                  <td>SYSU</td>
+	                  <td>1997</td>
+	                  <td>1</td>
+	                </tr>
+	                
+	              </tbody>
+	            </table>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
 
-          <h2 class="sub-header">SearchResult</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Position</th>
-                  <th>Year</th>
-                  <th>Level</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>中山大学公教楼</td>
-                  <td>Building</td>
-                  <td>SYSU</td>
-                  <td>1997</td>
-                  <td>1</td>
-                </tr>
-                <tr>
-                  <td>行政楼餐厅</td>
-                  <td>Building</td>
-                  <td>SYSU</td>
-                  <td>1997</td>
-                  <td>1</td>
-                </tr>
-                
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+    <div class="selectPage">
+		<button type="button" class="close" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+    	<div class="selectName">
+			<div class="selectPageNavigator"><span>Name</span></div>
+			<div id="NameCollection" class="Collection">
+				<form id="NameForm">
+					<label id="name1">
+						<input type="checkbox" id="c1_name1" class="mycheckbox" />
+						<span>中山大学第一师团撒旦发</span>
+					</label>
+
+				</form>
+			</div>
+		</div>
+		<div class="selectType">
+			<div class="selectPageNavigator"><span>Type</span></div>
+			<div id="TypeCollection" class="Collection">
+				<form id="TypeForm">
+					<label id="type1">
+						<input type="checkbox" id="c1_type1" class="mycheckbox" />
+						<span>Roof</span>
+					</label>
+				</form>
+			</div>
+		</div>
+		<div class="selectPosition">
+			<div class="selectPageNavigator"><span>Position</span></div>
+			<div id="PositionCollection" class="Collection">
+				<form id="PositionForm">
+					<label id="position1">
+						<input type="checkbox" id="c1_position1" class="mycheckbox" />
+						<span>SYSU</span>
+					</label>
+				</form>
+			</div>
+		</div>
+		<div class="selectYear">
+			<div class="selectPageNavigator"><span>Year</span></div>
+			<div id="YearCollection" class="Collection">
+				<form id="YearForm">
+					<label id="year1">
+						<input type="checkbox" id="c1_year1" class="mycheckbox" />
+						<span>SYSU</span>
+					</label>
+				</form>
+				
+			</div>
+		</div>
+		<div class="selectLevel">
+			<div class="selectPageNavigator"><span>Level</span></div>
+			<div id="LevelCollection" class="Collection">
+				<form id="LevelForm">
+					<label id="level1">
+						<input type="checkbox" id="c1_level1" class="mycheckbox" />
+						<span>SYSU</span>
+					</label>
+				</form>
+			</div>
+		</div>
+
+		<div class="controlBar">
+			<button type="button" class="btn btn-light">Light</button>
+			<button type="button" class="btn btn-dark">Dark</button>
+		</div>    	
+
     </div>
 
     <!-- Bootstrap core JavaScript
@@ -133,5 +203,6 @@
     <script src="../Public/assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../Public/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../ViewModel/index.js"></script>>
   </body>
 </html>
