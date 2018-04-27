@@ -60,7 +60,7 @@
 	      <div class="row">
 	        <div class="col-sm-3 col-md-2 sidebar">
 	          <ul class="nav nav-sidebar">
-	            <li id="SelectName" class="active"><a href="#">Name <span class="sr-only">(current)</span></a></li>
+	            <li id="SelectName" class="active"><a href="#">Fliter <span class="sr-only">(current)</span></a></li>
 	            <li><a href="#">Reports</a></li>
 	            <li><a href="#">Analytics</a></li>
 	            <li><a href="#">Export</a></li>
@@ -126,7 +126,7 @@
 
     <div class="selectPage">
 		<button type="button" class="close" aria-label="Close">
-		  <span aria-hidden="true">&times;</span>
+		  <span aria-hidden="true" id="close">&times;</span>
 		</button>
     	<div class="selectName">
 			<div class="selectPageNavigator"><span>Name</span></div>
@@ -187,8 +187,8 @@
 		</div>
 
 		<div class="controlBar">
-			<button type="button" class="btn btn-light">Light</button>
-			<button type="button" class="btn btn-dark">Dark</button>
+			<button type="button" class="btn btn-light" id="check">确定</button>
+			<button type="button" class="btn btn-dark" id="cancel">取消</button>
 		</div>    	
 
     </div>
