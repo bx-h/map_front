@@ -1,8 +1,10 @@
-var nameInit = false;
+var nameInit;
 
 $(function(){
 	$(".selectPage").hide();
+	nameInit = false;
 })
+
 $("#SelectName").click(function(){
 	showFliter();
 	$(".origin").addClass("DarkBody");
