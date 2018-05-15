@@ -31,7 +31,8 @@ $("#check").click(function(){
 }) 
 
 $("#cancel").click(function(){
-	$(".mycheckbox").attr("checked", false);
+	console.log("nope");
+	$(".mycheckbox").prop('checked', false);
 })
 
 /*-------根据已有数据显示筛选框--------*/
