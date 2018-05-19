@@ -1,210 +1,39 @@
-var width = 600;
-var height = 600;
-var img_w = 77;
+var width = 1000;
+var height = 700;
+var img_w = 80;
 var img_h = 80;
 var radius = 30; 
-//var selected_names = ["玄霄", "夙瑶"];
-//var str = "云天青";
 
-var svg = d3.select(".map").append("svg")
-						.attr("width",width)
-						.attr("height",height);
-		
-	
-		
+var svg = d3.select(".map")
+			.append("svg")
+			.attr("width",width)
+			.attr("height",height);
 
+d3.json("../Model/relation.json",function(error,root){
+	if( error ){
+		return console.log(error);
+	}
+	// console.log(root);
 
-		d3.json("../Model/relation.json",function(error,root){
-			
-			if( error ){
-				return console.log(error);
-			}
-			console.log(root);
-			
-			var force = d3.layout.force()
-							.nodes(root.nodes)
-							.links(root.edges)
-							.size([width,height])
-							.linkDistance(200)
-							.charge(-1500)
-							.start();
+	var force = d3.layout.force()
+				.nodes(root.nodes)
+				.links(root.edges)
+				.size([width,height])
+				.linkDistance(200)
+				.charge(-1500)
+				.start();
+	// console.log(selected_names);
 
-// console.log(selected_names);
-
-		var select = d3
-						.select("#check")
-						.on("click",function() {
-								var names = [];
-								// console.log(selected_names[NAME]);
-								edges_line.style("opacity",function(edge){
-									// if (edge.source.name === str) {
-									if (selected_names.	indexOf(edge.source.name) != -1) {
-										names.push(edge.target.name);
-									}
-									// else if (edge.target.name === str) {
-									else if (selected_names.indexOf(edge.target.name) != -1) {
-										names.push(edge.source.name);
-									}
-									else {
-										return 0.0;
-									}
-								});
-								nodes_img.style("opacity",function(node){
-									var result = 0.0;
-									for (i in names) {
-										// if (node.name === str || node.name === names[i]) {
-										if (selected_names.indexOf(node.name) != -1 || node.name === names[i]) {											
-											result = 1.0;
-										}
-									}
-									return result;
-								});	
-								nodes_text.style("opacity",function(node){
-									var result = 0.0;
-									for (i in names) {
-										// if (node.name === str || node.name === names[i]) {
-										if (selected_names.indexOf(node.name) != -1 || node.name === names[i]) {											
-											result = 1.0;
-										}
-									}
-									return result;
-								});	
-						})
-//箭头
-			// 				var marker = svg.append("marker") 
-			// 				.attr("id", "arrow") 
-   //           .attr("d","M0,-5L10,0L0,5")  
-   //           .attr("fill","white")  
-   //           .attr("stroke","red")  
-			// .attr("refX",32)//箭头坐标
-			// .attr("refY", -1)
-		 //    .attr("refX",32)//箭头坐标
-		 //    .attr("refY", -1)	
-   //           .attr("stroke-width",2)  
-
-   // var marker=
-   //  svg.append("marker")
-   //  //.attr("id", function(d) { return d; })
-   //  .attr("id", "arrow")
-   //  .attr("markerUnits","strokeWidth")//设置为strokeWidth箭头会随着线的粗细发生变化
-   //  // .attr("markerUnits","userSpaceOnUse")
-   //  .attr("viewBox", "0 0 12 12")//坐标系的区域
-   //  .attr("refX",30)//箭头坐标
-   //  .attr("refY", 6)
-   //  .attr("markerWidth", 13)//标识的大小
-   //  .attr("markerHeight", 13)
-   //  .attr("orient", "auto")//绘制方向，可设定为：auto（自动确认方向）和 角度值
-   //  .attr("stroke-width",2)//箭头宽度
-   //  .append("path")
-   //  .attr("d", "M2,2 L2,11 L10,6 L2,2")//箭头的路径
-   //  .attr('fill','#000000');//箭头颜色
- 
-							
-			var edges_line = svg.selectAll("line")
-								.data(root.edges)
-								.enter()
-								.append("line")
-								.style("stroke","#ccc")
-								.style("stroke-width",1)
-								// .attr("marker-end","url(#arrow)");  
-								
-			var edges_text = svg.selectAll(".linetext")
-								.data(root.edges)
-								.enter()
-								.append("text")
-								.attr("class","linetext")
-								.text(function(d){
-									return d.relation;
-								});
-		// var svg_nodes = svg.selectAll("circle")
-  //      .data(nodes)
-  //      .enter()
-  //      .append("circle")
-  //      .attr("r",20)
-  //      .style("fill",function(d,i){
-  //       return color(i);
-  //      })
-  //      .call(force.drag);
-								
-			var nodes_img = svg
-
-// 				.selectAll("circle")
-// 			     .data(root.nodes)
-// 			     .enter()
-// 			     .append("circle")
-// 			     .attr("r",20)
-// 			     .style("fill", "yellow")
-// .call(force.drag);
-
-
-
-
-				.selectAll("circle")
-                .data(root.nodes)
-                .enter()
-                .append("circle")
-                .attr("class", "circleImg")
-                .attr("r", radius)
-                .attr("fill", function(d, i){
-
-                    //创建圆形图片
-                    var defs = svg.append("defs").attr("id", "imgdefs")
-
-                    var catpattern = defs.append("pattern")
-                                    .attr("id", "catpattern" + i)
-                                    .attr("height", 1)
-                                    .attr("width", 1)
-
-                    catpattern.append("image")
-                            .attr("x", - (img_w / 2 - radius))
-                            .attr("y", - (img_h / 2 - radius))
-                            .attr("width", img_w)
-                            .attr("height", img_h)
-                            .attr("xlink:href", "../Public/imgs/" + d.image)
-
-                    return "url(#catpattern" + i + ")";
-
-                })
-
-
-
-
-
-				// .selectAll("image")
-				// .data(root.nodes)
-				// .enter()
-				// .append("image")
-				// .attr("width",img_w)
-				// .attr("height",img_h)
-				// .attr("xlink:href",function(d){
-				// 	return d.image;
-				// })
-
-
-
-				// .on("mouseover",function(d,i){
-				// 	//显示连接线上的文字
-				// 	edges_text.style("fill-opacity",function(edge){
-				// 		if( edge.source === d || edge.target === d ){
-				// 			return 1.0;
-				// 		}
-				// 	});
-				// })
-				// .on("click",function(d,i){
-				// 	//隐去连接线上的文字
-				// 	edges_text.style("fill-opacity",function(edge){
-				// 		if( edge.source === d || edge.target === d ){
-				// 			return 0.0;
-				// 		}
-				// 	});
-				// })
-				.on("click",function(d,i){
+	var select = d3.select("#check")
+			    .on("click",function() {
 					var names = [];
 					edges_line.style("opacity",function(edge){
-						if (edge.source === d) {
+						if ((selected_names.indexOf(edge.source.name) != -1 ) && 
+							(names.indexOf(edge.target.name) == -1)) {
 							names.push(edge.target.name);
 						}
-						else if (edge.target === d) {
+						else if ((selected_names.indexOf(edge.target.name) != -1) &&
+							(names.indexOf(edge.source.name) == -1)) {
 							names.push(edge.source.name);
 						}
 						else {
@@ -214,7 +43,7 @@ var svg = d3.select(".map").append("svg")
 					nodes_img.style("opacity",function(node){
 						var result = 0.0;
 						for (i in names) {
-							if (node.name === d.name || node.name === names[i]) {
+							if (selected_names.indexOf(node.name) != -1 || node.name === names[i]) {											
 								result = 1.0;
 							}
 						}
@@ -223,59 +52,130 @@ var svg = d3.select(".map").append("svg")
 					nodes_text.style("opacity",function(node){
 						var result = 0.0;
 						for (i in names) {
-							if (node.name === d.name || node.name === names[i]) {
+							if (selected_names.indexOf(node.name) != -1 || node.name === names[i]) {											
 								result = 1.0;
 							}
 						}
 						return result;
-					});		
-					// d.x = img_w / 2;
-					// d.y = img_h / 2;
-					// nodes_img.forEach							
-				})
-				.call(force.drag);
+					});	
+				});
+							
+	var edges_line = svg.selectAll("line")
+					.data(root.edges)
+					.enter()
+					.append("line")
+					.style("stroke","#ccc")
+					.style("stroke-width",1)
+						
+	var edges_text = svg.selectAll(".linetext")
+					.data(root.edges)
+					.enter()
+					.append("text")
+					.attr("class","linetext")
+					.text(function(d){
+						return d.relation;
+					});
+				
+
+	var nodes_img = svg.selectAll("circle")
+	                .data(root.nodes)
+	                .enter()
+	                .append("circle")
+	                .attr("class", "circleImg")
+	                .attr("r", radius)
+	                .attr("fill", function(d, i){
+	                    //创建圆形图片
+	                    var defs = svg.append("defs").attr("id", "imgdefs")
+
+	                    var catpattern = defs.append("pattern")
+	                                    .attr("id", "catpattern" + i)
+	                                    .attr("height", 1)
+	                                    .attr("width", 1)
+
+	                    catpattern.append("image")
+	                            .attr("x", - (img_w / 2 - radius))
+	                            .attr("y", - (img_h / 2 - radius))
+	                            .attr("width", img_w)
+	                            .attr("height", img_h)
+	                            .attr("xlink:href", "../Public/imgs/" + d.image)
+
+	                    return "url(#catpattern" + i + ")";
+	                })
+					.on("click",function(d,i){
+						var names = [];
+						edges_line.style("opacity",function(edge){
+							if (edge.source.name === d.name && names.indexOf(edge.target.name) == -1) {
+								names.push(edge.target.name);
+							}
+							else if (edge.target.name === d.name && names.indexOf(edge.source.name) == -1) {
+								names.push(edge.source.name);
+							}
+							else {
+								return 0.0;
+							}
+						});
+						nodes_img.style("opacity",function(node){
+							var result = 0.0;
+							for (i in names) {
+								if (node.name === d.name || node.name === names[i]) {
+									result = 1.0;
+								}
+							}
+							return result;
+						});	
+						nodes_text.style("opacity",function(node){
+							var result = 0.0;
+							for (i in names) {
+								if (node.name === d.name || node.name === names[i]) {
+									result = 1.0;
+								}
+							}
+							return result;
+						});								
+					})
+					.call(force.drag);
 			
-			var text_dx = -20;
-			var text_dy = 20;
+	var text_dx = -25;
+	var text_dy = 5;
 			
-			var nodes_text = svg.selectAll(".nodetext")
-								.data(root.nodes)
-								.enter()
-								.append("text")
-								.attr("class","nodetext")
-								.attr("dx",text_dx)
-								.attr("dy",text_dy)
-								.text(function(d){
-									return d.name;
-								});
+	var nodes_text = svg.selectAll(".nodetext")
+						.data(root.nodes)
+						.enter()
+						.append("text")
+						.attr("class","nodetext")
+						.attr("dx",text_dx)
+						.attr("dy",text_dy)
+						.text(function(d){
+							return d.name;
+						});
 			
 								
-			force.on("tick", function(){
-				
-				//限制结点的边界
-				root.nodes.forEach(function(d,i){
-					d.x = d.x - img_w/2 < 0     ? img_w/2 : d.x ;
-					d.x = d.x + img_w/2 > width ? width - img_w/2 : d.x ;
-					d.y = d.y - img_h/2 < 0      ? img_h/2 : d.y ;
-					d.y = d.y + img_h/2 + text_dy > height ? height - img_h/2 - text_dy : d.y ;
-				});
-			
-				//更新连接线的位置
-				 edges_line.attr("x1",function(d){ return d.source.x; });
-				 edges_line.attr("y1",function(d){ return d.source.y; });
-				 edges_line.attr("x2",function(d){ return d.target.x; });
-				 edges_line.attr("y2",function(d){ return d.target.y; });
-				 
-				 //更新连接线上文字的位置
-				 edges_text.attr("x",function(d){ return (d.source.x + d.target.x) / 2 ; });
-				 edges_text.attr("y",function(d){ return (d.source.y + d.target.y) / 2 ; });
-				 
-				 
-				 //更新结点图片和文字
-				 nodes_img.attr("cx",function(d){ return d.x - img_w/2 + 30; });
-				 nodes_img.attr("cy",function(d){ return d.y - img_h/2 + 30; });
-				 
-				 nodes_text.attr("x",function(d){ return d.x });
-				 nodes_text.attr("y",function(d){ return d.y + img_w/2; });
-			});
+	force.on("tick", function(){
+		
+		//限制结点的边界
+		root.nodes.forEach(function(d,i){
+			d.x = d.x - img_w/2 < 0     ? img_w/2 : d.x ;
+			d.x = d.x + img_w/2 > width ? width - img_w/2 : d.x ;
+			d.y = d.y - img_h/2 < 0      ? img_h/2 : d.y ;
+			d.y = d.y + img_h/2 + text_dy > height ? height - img_h/2 - text_dy : d.y ;
 		});
+	
+		//更新连接线的位置
+		 edges_line.attr("x1",function(d){ return d.source.x; });
+		 edges_line.attr("y1",function(d){ return d.source.y; });
+		 edges_line.attr("x2",function(d){ return d.target.x; });
+		 edges_line.attr("y2",function(d){ return d.target.y; });
+		 
+		 //更新连接线上文字的位置
+		 edges_text.attr("x",function(d){ return (d.source.x + d.target.x) / 2 ; });
+		 edges_text.attr("y",function(d){ return (d.source.y + d.target.y) / 2 ; });
+		 
+		 
+		 //更新结点图片和文字
+		 nodes_img.attr("cx",function(d){ return d.x - img_w/2 + 30; });
+		 nodes_img.attr("cy",function(d){ return d.y - img_h/2 + 30; });
+		 
+		 nodes_text.attr("x",function(d){ return d.x});
+		 nodes_text.attr("y",function(d){ return d.y + img_w/2; });
+	});
+});
