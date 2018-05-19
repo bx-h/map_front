@@ -1,52 +1,20 @@
-<html>
- <head>
-        <meta charset="utf-8">  
-        <title>Force</title>  
-  </head> 
+var width = 600;
+var height = 600;
+var img_w = 77;
+var img_h = 80;
+var radius = 30; 
+//var selected_names = ["玄霄", "夙瑶"];
+//var str = "云天青";
 
-<style>
-
-.nodetext {
-	font-size: 12px ;
-	font-family: SimSun;
-	fill:#000000;
-}
-
-.linetext {
-	font-size: 12px ;
-	font-family: SimSun;
-	fill:#0000FF;
-	fill-opacity:0.0;
-}
-
-.circleImg {
-  stroke: #ff7f0e;
-  stroke-width: 1.5px;
-}
-
-</style>
-    <body>  
-    	<button >选择</button>
-		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>  
-        <script>		   
-		
-		var width = 600;
-		var height = 600;
-		var img_w = 77;
-		var img_h = 80;
-		var radius = 30; 
-		var selected_names = ["玄霄", "夙瑶"];
-		var str = "云天青";
-
-		var svg = d3.select("body").append("svg")
-								.attr("width",width)
-								.attr("height",height);
+var svg = d3.select(".map").append("svg")
+						.attr("width",width)
+						.attr("height",height);
 		
 	
 		
 
 
-		d3.json("relation.json",function(error,root){
+		d3.json("../Model/relation.json",function(error,root){
 			
 			if( error ){
 				return console.log(error);
@@ -63,8 +31,8 @@
 
 // console.log(selected_names);
 
-		var select = d3.select("body")
-						.select("button")
+		var select = d3
+						.select("#check")
 						.on("click",function() {
 								var names = [];
 								// console.log(selected_names[NAME]);
@@ -192,7 +160,7 @@
                             .attr("y", - (img_h / 2 - radius))
                             .attr("width", img_w)
                             .attr("height", img_h)
-                            .attr("xlink:href", d.image)
+                            .attr("xlink:href", "../Public/imgs/" + d.image)
 
                     return "url(#catpattern" + i + ")";
 
@@ -311,8 +279,3 @@
 				 nodes_text.attr("y",function(d){ return d.y + img_w/2; });
 			});
 		});
-		  
-        </script>  
-		
-    </body>  
-</html>  

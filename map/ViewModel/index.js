@@ -1,5 +1,5 @@
 var nameInit;
-
+var selected_names = [];
 $(function(){
 	$(".selectPage").hide();
 	nameInit = false;
@@ -16,22 +16,23 @@ $("#close").click(function(){
 })
 
 $("#check").click(function(){
-	var nameArray = [];
+	selected_names = [];
 	$("#NameForm").find("input").each(function(){
 		console.log($(this).checked);
 		if ($(this).is(":checked")) {
 			console.log("yes");
-			nameArray.push($(this).next().text());
+			selected_names.push($(this).next().text());
 		}
 	});
-	console.log(nameArray);
-	//处理已选中的node（name标识，存在nameArray里）
-
+	console.log(selected_names);
+	//处理已选中的node（name标识，存在selected_names里）
+	$(".selectPage").hide();
+	$(".origin").removeClass("DarkBody");
 
 }) 
 
 $("#cancel").click(function(){
-	console.log("nope");
+	selected_names = [];
 	$(".mycheckbox").prop('checked', false);
 })
 
@@ -64,3 +65,5 @@ function addName(name,count) {
 	$("#NameForm").append(label);
 
 }
+
+
