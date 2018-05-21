@@ -28,13 +28,13 @@ d3.json("../Model/relation.json",function(error,root){
 			    .on("click",function() {
 					var names = [];
 					edges_line.style("opacity",function(edge){
-						if ((selected_names.indexOf(edge.source.name) != -1 ) && 
-							(names.indexOf(edge.target.name) == -1)) {
-							names.push(edge.target.name);
+						if (selected_names.indexOf(edge.source.name) != -1) {
+							if (names.indexOf(edge.target.name) == -1)
+								names.push(edge.target.name);
 						}
-						else if ((selected_names.indexOf(edge.target.name) != -1) &&
-							(names.indexOf(edge.source.name) == -1)) {
-							names.push(edge.source.name);
+						else if (selected_names.indexOf(edge.target.name) != -1) {
+							if (names.indexOf(edge.source.name) == -1)
+								names.push(edge.source.name);
 						}
 						else {
 							return 0.0;
@@ -101,7 +101,7 @@ d3.json("../Model/relation.json",function(error,root){
 
 	                    return "url(#catpattern" + i + ")";
 	                })
-					.on("click",function(d,i){
+					.on("dblclick",function(d,i){
 						var names = [];
 						edges_line.style("opacity",function(edge){
 							if (edge.source.name === d.name && names.indexOf(edge.target.name) == -1) {
